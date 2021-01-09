@@ -1,20 +1,15 @@
+import {useEffect, createElement} from 'react';
 import ReactDOM from 'react-dom';
-import React, {useEffect, useRef} from "react";
 
-export const Iframe = ({children, width, height}) => {
-
-    const iframeRef = useRef(null);
+export const IFrame = ({children, styles={}}) => {
 
     useEffect(() => {
-        if(iframeRef.current) {
-            const doc = iframeRef.current.contentDocument;
-            const createDiv = document.createElement("div");
-            doc.body.appendChild(createDiv);
-            ReactDOM.render(children, createDiv);
-        }
+        const ifrm = document.getElementById("rfc-iframe-v1");
+        const doc = ifrm.contentDocument;
+        const createDiv = document.createElement("div");
+        doc.body.appendChild(createDiv);
+        ReactDOM.render(children, createDiv);
     }, []);
 
-    return(
-        <iframe ref={iframeRef} width={width ? width : window.innerWidth} height={height ? height : window.innerHeight} />
-    )
-}
+    return createElement("iframe", {...styles, id: "rfc-iframe-v1"}, null);
+};

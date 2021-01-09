@@ -1,5 +1,7 @@
 # rfc-iframe
 
+This is a react functional component wrapper for iFrame.
+
 ### Installation
 
 `npm install rfc-iframe --save`
@@ -21,7 +23,7 @@ export default class WhatEver extends React.Component {
     render() {
         return (
             <div>
-                <IFrame width={"500px"} height={"500px"}>
+                <IFrame styles={{width: "100%", ...}}>
                     <p>{ this.state.text }</p>            
                 </IFrame>        
             </div>
@@ -29,3 +31,5 @@ export default class WhatEver extends React.Component {
     }
 }
 ```
+
+## Idea Taken From i-rocky (Rasel Rana Rocky). Big shout out to him.
