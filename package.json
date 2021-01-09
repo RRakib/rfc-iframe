@@ -9,6 +9,8 @@
   "keywords": [
     "React"
   ],
+  "homepage": "https://github.com/RRakib/rfc-iframe#readme",
+  "repository": "https://github.com/RRakib/rfc-iframe",
   "author": "Rakib Uddin",
   "license": "MIT",
   "peerDependencies": {
