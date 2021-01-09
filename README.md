@@ -15,16 +15,13 @@ or
 ```JS
 import {IFrame} from 'rfc-iframe';
 
-export default class WhatEver extends React.Component {
-    state = {
-        text: 'Hello World',
-    }
+const WhatEver = () => {
     
     render() {
         return (
             <div>
                 <IFrame styles={{width: "100%", ...}}>
-                    <p>{ this.state.text }</p>            
+                    <p>Your Beautiful Website</p>            
                 </IFrame>        
             </div>
         );
@@ -32,4 +29,4 @@ export default class WhatEver extends React.Component {
 }
 ```
 
-## Idea Taken From i-rocky (Rasel Rana Rocky). Big shout out to him.
+### Idea Taken From i-rocky (Rasel Rana Rocky). Big shout out to him.
