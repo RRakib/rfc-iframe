@@ -17,15 +17,13 @@ import {IFrame} from 'rfc-iframe';
 
 const WhatEver = () => {
     
-    render() {
-        return (
-            <div>
-                <IFrame styles={{width: "100%", ...}}>
-                    <p>Your Beautiful Website</p>            
-                </IFrame>        
-            </div>
-        );
-    }
+    return (
+        <div>
+            <IFrame styles={{width: "100%", ...}}>
+                <p>Your Beautiful Website</p>            
+            </IFrame>        
+        </div>
+    );
 }
 ```
 

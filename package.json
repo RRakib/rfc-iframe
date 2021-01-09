@@ -1,6 +1,6 @@
 {
   "name": "rfc-iframe",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React Functional Component Wrapper For Iframe",
   "main": "index.js",
   "scripts": {
