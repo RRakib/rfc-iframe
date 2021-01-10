@@ -1,5 +1,9 @@
 # rfc-iframe
 
+[![Version](https://img.shields.io/npm/v/rfc-iframe.svg)](https://www.npmjs.com/package/rfc-iframe)
+[![Total Downloads](https://img.shields.io/npm/dt/rfc-iframe.svg)](https://www.npmjs.com/package/rfc-iframe)
+[![License](https://img.shields.io/github/license/rrakib/rfc-iframe.svg)](https://github.com/rrakib/rfc-iframe/blob/master/LICENSE)
+
 This is a react functional component wrapper for iFrame.
 
 ### Installation
