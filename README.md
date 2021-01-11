@@ -4,7 +4,7 @@
 [![Total Downloads](https://img.shields.io/npm/dt/rfc-iframe.svg)](https://www.npmjs.com/package/rfc-iframe)
 [![License](https://img.shields.io/github/license/rrakib/rfc-iframe.svg)](https://github.com/rrakib/rfc-iframe/blob/master/LICENSE)
 
-This is a react functional component wrapper for iFrame.
+This is a react iframe wrapper. You can easily integrate external or internal style and scripts with this plugin.
 
 ### Installation
 
