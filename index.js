@@ -11,7 +11,7 @@ export const IFrame = ({
     externalStyleLinks = [],
     externalScripts = [],
     frameId = "rfc-iframe-v1",
-    rerenderIframe = null,
+    rerenderIframe = [],
     disableStyledComponent = false }) => {
 
     useEffect(() => {
