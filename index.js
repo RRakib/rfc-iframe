@@ -77,19 +77,18 @@ export const IFrame = ({
             }
         } else {
             if(doc.body.hasChildNodes()) {
-                ReactDOM.render(
-                    <StyleSheetManager target={doc.head}>
-                        {children}
-                    </StyleSheetManager>, doc.body.firstElementChild)
+
+                const elem = createElement(StyleSheetManager, {target: doc.head}, children);
+
+                ReactDOM.render(elem, doc.body.firstElementChild)
             } else {
                 const createDiv = document.createElement("div");
 
                 doc.body.appendChild(createDiv);
 
-                ReactDOM.render(
-                    <StyleSheetManager target={doc.head}>
-                        {children}
-                    </StyleSheetManager>, createDiv)
+                const elem = createElement(StyleSheetManager, {target: doc.head}, children)
+
+                ReactDOM.render(elem, createDiv)
             }
         }
     };
