@@ -24,6 +24,8 @@ const WhatEver = () => {
     return (
         <div>
             <IFrame 
+                frameId={"pass_an_here"}
+                rerenderIframe = {[yourState1, yourState2]} // default []
                 frameAttributes = {{width: "100%", ...}}
                 copyStyleLinks = {true} // default false
                 copyHeaderStyle = {true} // default false
@@ -37,6 +39,8 @@ const WhatEver = () => {
 ```
 
 ### Props
+* ``` frameId ``` - specify an id for the iframe so that you can use multiple.
+* ``` rerenderIframe (optional)``` - dependency that will trigger rerender of your react component inside the iframe.
 * ``` frameAttributes (optional) ``` - specify dom attributes for iframe.
 * ``` copyHeaderStyle (optional) ``` - will copy the styles from main document header. (default false)
 * ``` copyStyleLinks (optional) ``` - will copy the style links from the header. (default false)

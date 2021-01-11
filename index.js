@@ -1,17 +1,27 @@
 import ReactDOM from 'react-dom';
 import {useEffect, createElement} from 'react';
 
-export const IFrame = ({children, frameAttributes={}, copyHeaderStyle = false, copyStyleLinks = false, externalStyleLinks = [], externalScripts = []}) => {
+export const IFrame = ({
+   children,
+   frameAttributes={},
+   copyHeaderStyle = false,
+   copyStyleLinks = false,
+   externalStyleLinks = [],
+   externalScripts = [],
+   frameId = "rfc-iframe-v1",
+   rerenderIframe = null }) => {
 
     useEffect(() => {
-        const ifrm = document.getElementById("rfc-iframe-v1");
+        const ifrm = document.getElementById(frameId);
         const doc = ifrm.contentDocument;
-        copyStyle(doc);
-        copyLinks(doc);
-        setStyleLink(doc);
-        setExternalScripts(doc);
+        if(!doc.body.hasChildNodes()) {
+            copyStyle(doc);
+            copyLinks(doc);
+            setStyleLink(doc);
+            setExternalScripts(doc);
+        }
         renderElementsInsideIframe(doc);
-    }, []);
+    }, [...rerenderIframe]);
 
     const copyStyle = (doc) => {
         if(copyHeaderStyle) {
@@ -49,13 +59,17 @@ export const IFrame = ({children, frameAttributes={}, copyHeaderStyle = false, c
                 doc.head.appendChild(domScript);
             })
         }
-    }
-
-    const renderElementsInsideIframe = (doc) => {
-        const createDiv = document.createElement("div");
-        doc.body.appendChild(createDiv);
-        ReactDOM.render(children, createDiv);
     };
 
-    return createElement("iframe", {...frameAttributes, id: "rfc-iframe-v1"}, null);
+    const renderElementsInsideIframe = (doc) => {
+        if(doc.body.hasChildNodes()) {
+            ReactDOM.render(children, doc.body.firstElementChild);
+        } else {
+            const createDiv = document.createElement("div");
+            doc.body.appendChild(createDiv);
+            ReactDOM.render(children, createDiv);
+        }
+    };
+
+    return createElement("iframe", {...frameAttributes, id: frameId}, null);
 };
