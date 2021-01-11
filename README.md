@@ -23,7 +23,12 @@ const WhatEver = () => {
     
     return (
         <div>
-            <IFrame styles={{width: "100%", ...}}>
+            <IFrame 
+                frameAttributes = {{width: "100%", ...}}
+                copyStyleLinks = {true} // default false
+                copyHeaderStyle = {true} // default false
+                externalStyleLinks = ["https://yourextercsslink.com"] // default []
+                externalScripts = ["https://yourexterscriptlink.com"] // default []>
                 <p>Your Beautiful Website</p>            
             </IFrame>        
         </div>
@@ -31,4 +36,21 @@ const WhatEver = () => {
 }
 ```
 
-### Idea Taken From i-rocky (Rasel Rana Rocky). Big shout out to him.
+### Props
+* ``` frameAttributes (optional) ``` - specify dom attributes for iframe.
+* ``` copyHeaderStyle (optional) ``` - will copy the styles from main document header. (default false)
+* ``` copyStyleLinks (optional) ``` - will copy the style links from the header. (default false)
+* ``` externalStyleLinks (optional) ``` - you can include any external css or css from you own domain. You have to pass the links as an array. (default [])
+* ``` externalScripts (optional) ``` - you can include any external scripts or scripts from you own domain. You have to pass them as an array. (default [])
+
+### Changelog
+> If you were using v1 before all you have to do is change your ```styles``` prop to ```frameAttributes```.
+
+### Thanks
+Thank you for checking this our.
+ 
+ iFrame can be complex at times, mostly when you what to work with external style or scripts. I hope this will help with that problem. If you want to contribute to this project send a pull request.
+
+
+
+**Inspiration Taken From My Good Friend [i-rocky](https://github.com/i-rocky).**
