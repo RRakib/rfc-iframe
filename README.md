@@ -4,7 +4,7 @@
 [![Total Downloads](https://img.shields.io/npm/dt/rfc-iframe.svg)](https://www.npmjs.com/package/rfc-iframe)
 [![License](https://img.shields.io/github/license/rrakib/rfc-iframe.svg)](https://github.com/rrakib/rfc-iframe/blob/master/LICENSE)
 
-This is a react iframe wrapper. You can easily integrate external or internal style and scripts with this plugin.
+This is a react iframe wrapper. You can easily integrate external or internal style and scripts with this plugin. This plugin is compatible with styled component. You can disable it if you want. 
 
 ### Installation
 
@@ -25,6 +25,7 @@ const WhatEver = () => {
         <div>
             <IFrame 
                 frameId={"pass_an_here"}
+                disableStyledComponent={true} // default false
                 rerenderIframe = {[yourState1, yourState2]} // default []
                 frameAttributes = {{width: "100%", ...}}
                 copyStyleLinks = {true} // default false
@@ -41,6 +42,7 @@ const WhatEver = () => {
 ### Props
 * ``` frameId ``` - specify an id for the iframe so that you can use multiple.
 * ``` rerenderIframe (optional)``` - dependency that will trigger rerender of your react component inside the iframe.
+* ``` disableStyledComponent (optional)``` - if set to true it will disable styled component compatibility.
 * ``` frameAttributes (optional) ``` - specify dom attributes for iframe.
 * ``` copyHeaderStyle (optional) ``` - will copy the styles from main document header. (default false)
 * ``` copyStyleLinks (optional) ``` - will copy the style links from the header. (default false)

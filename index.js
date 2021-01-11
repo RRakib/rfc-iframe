@@ -1,15 +1,18 @@
 import ReactDOM from 'react-dom';
 import {useEffect, createElement} from 'react';
+import { StyleSheetManager } from 'styled-components';
+
 
 export const IFrame = ({
-   children,
-   frameAttributes={},
-   copyHeaderStyle = false,
-   copyStyleLinks = false,
-   externalStyleLinks = [],
-   externalScripts = [],
-   frameId = "rfc-iframe-v1",
-   rerenderIframe = null }) => {
+    children,
+    frameAttributes={},
+    copyHeaderStyle = false,
+    copyStyleLinks = false,
+    externalStyleLinks = [],
+    externalScripts = [],
+    frameId = "rfc-iframe-v1",
+    rerenderIframe = null,
+    disableStyledComponent = false }) => {
 
     useEffect(() => {
         const ifrm = document.getElementById(frameId);
@@ -19,7 +22,7 @@ export const IFrame = ({
             copyLinks(doc);
             setStyleLink(doc);
             setExternalScripts(doc);
-        }
+        };
         renderElementsInsideIframe(doc);
     }, [...rerenderIframe]);
 
@@ -62,12 +65,32 @@ export const IFrame = ({
     };
 
     const renderElementsInsideIframe = (doc) => {
-        if(doc.body.hasChildNodes()) {
-            ReactDOM.render(children, doc.body.firstElementChild);
+        if(disableStyledComponent) {
+            if(doc.body.hasChildNodes()) {
+                ReactDOM.render(children, doc.body.firstElementChild)
+            } else {
+                const createDiv = document.createElement("div");
+
+                doc.body.appendChild(createDiv);
+
+                ReactDOM.render(children, createDiv)
+            }
         } else {
-            const createDiv = document.createElement("div");
-            doc.body.appendChild(createDiv);
-            ReactDOM.render(children, createDiv);
+            if(doc.body.hasChildNodes()) {
+                ReactDOM.render(
+                    <StyleSheetManager target={doc.head}>
+                        {children}
+                    </StyleSheetManager>, doc.body.firstElementChild)
+            } else {
+                const createDiv = document.createElement("div");
+
+                doc.body.appendChild(createDiv);
+
+                ReactDOM.render(
+                    <StyleSheetManager target={doc.head}>
+                        {children}
+                    </StyleSheetManager>, createDiv)
+            }
         }
     };
 
