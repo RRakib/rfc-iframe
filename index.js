@@ -17,6 +17,8 @@ export const IFrame = ({
     useEffect(() => {
         const ifrm = document.getElementById(frameId);
         const doc = ifrm.contentDocument;
+        doc.body.style.padding = "0";
+        doc.body.style.margin = "0";
         if(!doc.body.hasChildNodes()) {
             copyStyle(doc);
             copyLinks(doc);
