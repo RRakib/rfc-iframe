@@ -7,6 +7,7 @@ export const IFrame = ({
                            children,
                            frameAttributes={},
                            copyHeaderStyle = false,
+                           copySpecificHeaderStyle = [],
                            copyStyleLinks = false,
                            externalStyleLinks = [],
                            externalScripts = [],
@@ -24,6 +25,7 @@ export const IFrame = ({
             copyStyle(doc);
             copyLinks(doc);
             setStyleLink(doc);
+            copySpecificStyle(doc);
             setExternalScripts(doc);
         };
         renderElementsInsideIframe(doc);
@@ -39,12 +41,20 @@ export const IFrame = ({
         }
     };
 
+    const copySpecificStyle = (doc) => {
+        if(!copyHeaderStyle && copySpecificHeaderStyle.length > 0) {
+            setTimeout(() => {
+                copySpecificHeaderStyle.forEach(item => {
+                    doc.head.appendChild(document.getElementById(item).cloneNode(true));
+                })
+            }, headerStyleDelay)
+        }
+    };
+
     const copyLinks = (doc) => {
         if(copyStyleLinks) {
-            setTimeout(() => {
-                Array.from(document.head.getElementsByTagName("link")).forEach(item => {
-                    doc.head.appendChild(item.cloneNode(true))
-                })
+            Array.from(document.head.getElementsByTagName("link")).forEach(item => {
+                doc.head.appendChild(item.cloneNode(true))
             })
         }
     };
