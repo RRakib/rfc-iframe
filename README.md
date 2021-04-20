@@ -47,7 +47,7 @@ const WhatEver = () => {
 * ``` disableStyledComponent (optional)``` - if set to true it will disable styled component compatibility.
 * ``` frameAttributes (optional) ``` - specify dom attributes for iframe.
 * ``` copyHeaderStyle (optional) ``` - will copy the styles from main document header. (default false)
-* ``` copySpecificHeaderStyle (optional) ``` - will copy the specific styles from main document header. (default [])
+* ``` copySpecificHeaderStyle (optional) ``` - will copy the specific styles from main document header. `copyHeaderStyle` must be set to `false` for this to work. (default [])
 * ``` headerStyleDelay (optional) ``` - will wait for given milliseconds before copying header style. (default 0)
 * ``` copyStyleLinks (optional) ``` - will copy the style links from the header. (default false)
 * ``` externalStyleLinks (optional) ``` - you can include any external css or css from you own domain. You have to pass the links as an array. (default [])
