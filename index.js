@@ -4,15 +4,16 @@ import { StyleSheetManager } from 'styled-components';
 
 
 export const IFrame = ({
-    children,
-    frameAttributes={},
-    copyHeaderStyle = false,
-    copyStyleLinks = false,
-    externalStyleLinks = [],
-    externalScripts = [],
-    frameId = "rfc-iframe-v1",
-    rerenderIframe = [],
-    disableStyledComponent = false }) => {
+                           children,
+                           frameAttributes={},
+                           copyHeaderStyle = false,
+                           copyStyleLinks = false,
+                           externalStyleLinks = [],
+                           externalScripts = [],
+                           frameId = "rfc-iframe-v1",
+                           rerenderIframe = [],
+                           headerStyleDelay = 0,
+                           disableStyledComponent = false }) => {
 
     useEffect(() => {
         const ifrm = document.getElementById(frameId);
@@ -30,16 +31,20 @@ export const IFrame = ({
 
     const copyStyle = (doc) => {
         if(copyHeaderStyle) {
-            Array.from(document.head.getElementsByTagName("style")).forEach(item => {
-                doc.head.appendChild(item.cloneNode(true))
-            })
+            setTimeout(() => {
+                Array.from(document.head.getElementsByTagName("style")).forEach(item => {
+                    doc.head.appendChild(item.cloneNode(true))
+                })
+            }, headerStyleDelay)
         }
     };
 
     const copyLinks = (doc) => {
         if(copyStyleLinks) {
-            Array.from(document.head.getElementsByTagName("link")).forEach(item => {
-                doc.head.appendChild(item.cloneNode(true))
+            setTimeout(() => {
+                Array.from(document.head.getElementsByTagName("link")).forEach(item => {
+                    doc.head.appendChild(item.cloneNode(true))
+                })
             })
         }
     };

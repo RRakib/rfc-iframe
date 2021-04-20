@@ -30,6 +30,7 @@ const WhatEver = () => {
                 frameAttributes = {{width: "100%", ...}}
                 copyStyleLinks = {true} // default false
                 copyHeaderStyle = {true} // default false
+                headerStyleDelay = {50} // default 0
                 externalStyleLinks = ["https://yourextercsslink.com"] // default []
                 externalScripts = ["https://yourexterscriptlink.com"] // default []>
                 <p>Your Beautiful Website</p>            
@@ -45,6 +46,7 @@ const WhatEver = () => {
 * ``` disableStyledComponent (optional)``` - if set to true it will disable styled component compatibility.
 * ``` frameAttributes (optional) ``` - specify dom attributes for iframe.
 * ``` copyHeaderStyle (optional) ``` - will copy the styles from main document header. (default false)
+* ``` headerStyleDelay (optional) ``` - will wait for given milliseconds before copying header style. (default 0)
 * ``` copyStyleLinks (optional) ``` - will copy the style links from the header. (default false)
 * ``` externalStyleLinks (optional) ``` - you can include any external css or css from you own domain. You have to pass the links as an array. (default [])
 * ``` externalScripts (optional) ``` - you can include any external scripts or scripts from you own domain. You have to pass them as an array. (default [])
