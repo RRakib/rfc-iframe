@@ -9,6 +9,7 @@ export const IFrame = ({
                            copyHeaderStyle = false,
                            copySpecificHeaderStyle = [],
                            copyStyleLinks = false,
+                           stopNestedDOM = true,
                            externalStyleLinks = [],
                            externalScripts = [],
                            frameId = "rfc-iframe-v1",
@@ -21,11 +22,11 @@ export const IFrame = ({
         const doc = ifrm.contentDocument;
         doc.body.style.padding = "0";
         doc.body.style.margin = "0";
+        copySpecificStyle(doc);
         if(!doc.body.hasChildNodes()) {
             copyStyle(doc);
             copyLinks(doc);
             setStyleLink(doc);
-            copySpecificStyle(doc);
             setExternalScripts(doc);
         };
         renderElementsInsideIframe(doc);
@@ -42,7 +43,14 @@ export const IFrame = ({
     };
 
     const copySpecificStyle = (doc) => {
+        const myNode = doc.head.getElementsByTagName('style');
+        for (let i=0; i <= myNode.length; i++) {
+            if(myNode[i]) {
+                doc.head.removeChild(myNode[0]);
+            }
+        }
         if(!copyHeaderStyle && copySpecificHeaderStyle.length > 0) {
+
             setTimeout(() => {
                 copySpecificHeaderStyle.forEach(item => {
                     doc.head.appendChild(document.getElementById(item).cloneNode(true));
@@ -84,7 +92,9 @@ export const IFrame = ({
     const renderElementsInsideIframe = (doc) => {
         if(disableStyledComponent) {
             if(doc.body.hasChildNodes()) {
-                ReactDOM.render(children, doc.body.firstElementChild)
+                if(stopNestedDOM) {
+                    ReactDOM.render(children, doc.body.firstElementChild)
+                }
             } else {
                 const createDiv = document.createElement("div");
 

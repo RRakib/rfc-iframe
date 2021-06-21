@@ -25,6 +25,7 @@ const WhatEver = () => {
         <div>
             <IFrame 
                 frameId={"pass_an_here"}
+                stopNestedDOM={false} // default true
                 disableStyledComponent={true} // default false
                 rerenderIframe = {[yourState1, yourState2]} // default []
                 frameAttributes = {{width: "100%", ...}}
@@ -43,6 +44,7 @@ const WhatEver = () => {
 
 ### Props
 * ``` frameId ``` - specify an id for the iframe so that you can use multiple.
+* ``` stopNestedDOM (optional)``` - stop appending children in to the root div.
 * ``` rerenderIframe (optional)``` - dependency that will trigger rerender of your react component inside the iframe.
 * ``` disableStyledComponent (optional)``` - if set to true it will disable styled component compatibility.
 * ``` frameAttributes (optional) ``` - specify dom attributes for iframe.
