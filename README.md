@@ -4,7 +4,7 @@
 [![Total Downloads](https://img.shields.io/npm/dt/rfc-iframe.svg)](https://www.npmjs.com/package/rfc-iframe)
 [![License](https://img.shields.io/github/license/rrakib/rfc-iframe.svg)](https://github.com/rrakib/rfc-iframe/blob/master/LICENSE)
 
-This is a react iframe wrapper. You can easily integrate external or internal style and scripts with this plugin. This plugin is compatible with styled component. You can disable it if you want. 
+This is a react iframe wrapper. You can easily integrate external or internal style and scripts with this plugin. This plugin supports goober out of the box. 
 
 ### Installation
 
@@ -23,18 +23,12 @@ const WhatEver = () => {
     
     return (
         <div>
-            <IFrame 
-                frameId={"pass_an_here"}
-                stopNestedDOM={false} // default true
-                disableStyledComponent={true} // default false
-                rerenderIframe = {[yourState1, yourState2]} // default []
+            <IFrame
+                goober = {false} // default True
                 frameAttributes = {{width: "100%", ...}}
-                copyStyleLinks = {true} // default false
-                copyHeaderStyle = {true} // default false
-                headerStyleDelay = {50} // default 0
-                copySpecificHeaderStyle = {['your_style_id']} // default []
                 externalStyleLinks = ["https://yourextercsslink.com"] // default []
-                externalScripts = ["https://yourexterscriptlink.com"] // default []>
+                externalScripts = ["https://yourexterscriptlink.com"] // default []
+            >
                 <p>Your Beautiful Website</p>            
             </IFrame>        
         </div>
@@ -43,20 +37,13 @@ const WhatEver = () => {
 ```
 
 ### Props
-* ``` frameId ``` - specify an id for the iframe so that you can use multiple.
-* ``` stopNestedDOM (optional)``` - stop appending children in to the root div.
-* ``` rerenderIframe (optional)``` - dependency that will trigger rerender of your react component inside the iframe.
-* ``` disableStyledComponent (optional)``` - if set to true it will disable styled component compatibility.
-* ``` frameAttributes (optional) ``` - specify dom attributes for iframe.
-* ``` copyHeaderStyle (optional) ``` - will copy the styles from main document header. (default false)
-* ``` copySpecificHeaderStyle (optional) ``` - will copy the specific styles from main document header. `copyHeaderStyle` must be set to `false` for this to work. (default [])
-* ``` headerStyleDelay (optional) ``` - will wait for given milliseconds before copying header style. (default 0)
-* ``` copyStyleLinks (optional) ``` - will copy the style links from the header. (default false)
+* ``` goober (optional) ``` - this plugin supports goober out of the box. If you dont want this feature then set the value to false. (default boolean)
+* ``` frameAttributes (optional) ``` - specify dom attributes for iframe. (default {})
 * ``` externalStyleLinks (optional) ``` - you can include any external css or css from you own domain. You have to pass the links as an array. (default [])
 * ``` externalScripts (optional) ``` - you can include any external scripts or scripts from you own domain. You have to pass them as an array. (default [])
 
 ### Changelog
-> If you were using v1 before all you have to do is change your ```styles``` prop to ```frameAttributes```.
+> V3 is very light weight. We have removed support for styled component and brought goober as a replacement.
 
 ### Thanks
 Thank you for checking this our.
