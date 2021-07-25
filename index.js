@@ -14,6 +14,11 @@ export const IFrame = ({
     let iFrameRef = useRef(null)
 
     useEffect(() => {
+
+        if (!iFrameRef.current) {
+            return
+        }
+
         if (!iFrameRef.current.contentDocument) {
             return
         }
@@ -37,7 +42,7 @@ export const IFrame = ({
     const gooberStyleCopy = () => {
         const css = extractCss()
         const style = iFrameRef.current.contentDocument.createElement('style');
-        if (Array.from(iFrameRef.current.contentDocument.head.getElementsByTagName('style')).length === 0) {
+        if (!iFrameRef.current.contentDocument.getElementById('__goober')) {
             style.id = '__goober';
             iFrameRef.current.contentDocument.head.appendChild(style);
         }
