@@ -21,21 +21,40 @@ export const IFrame = ({
 
         if (!iFrameRef.current.contentDocument) {
             return
+
         }
 
-        ReactDOM.render(children, iFrameRef.current.contentDocument.body);
+        if (typeof InstallTrigger !== 'undefined') {
+            setTimeout(() => {
+                ReactDOM.render(children, iFrameRef.current.contentDocument.body);
 
-        const doc = iFrameRef.current.contentDocument;
-        doc.body.style.padding = "0";
-        doc.body.style.margin = "0";
+                const doc = iFrameRef.current.contentDocument;
+                doc.body.style.padding = "0";
+                doc.body.style.margin = "0";
 
-        if(!doc.body.hasChildNodes()) {
-            setStyleLink(doc);
-            setExternalScripts(doc);
-        };
+                if(!doc.body.hasChildNodes()) {
+                    setStyleLink(doc);
+                    setExternalScripts(doc);
+                };
 
-        if(goober) {
-            gooberStyleCopy();
+                if(goober) {
+                    gooberStyleCopy();
+                }
+            }, 50)
+        } else {
+            ReactDOM.render(children, iFrameRef.current.contentDocument.body);
+            const doc = iFrameRef.current.contentDocument;
+            doc.body.style.padding = "0";
+            doc.body.style.margin = "0";
+
+            if(!doc.body.hasChildNodes()) {
+                setStyleLink(doc);
+                setExternalScripts(doc);
+            };
+
+            if(goober) {
+                gooberStyleCopy();
+            }
         }
     });
 
