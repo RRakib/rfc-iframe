@@ -9,6 +9,7 @@ export const IFrame = ({
                            frameAttributes={},
                            externalStyleLinks = [],
                            externalScripts = [],
+                           enabledLatencyForMozilla = true,
                        }) => {
 
     let iFrameRef = useRef(null)
@@ -24,7 +25,7 @@ export const IFrame = ({
 
         }
 
-        if (typeof InstallTrigger !== 'undefined') {
+        if (typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) {
             setTimeout(() => {
                 ReactDOM.render(children, iFrameRef.current.contentDocument.body);
 
