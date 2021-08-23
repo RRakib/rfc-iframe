@@ -26,6 +26,7 @@ const WhatEver = () => {
             <IFrame
                 goober = {false} // default True
                 frameAttributes = {{width: "100%", ...}}
+                enabledLatencyForSafari = {false} // default True
                 enabledLatencyForMozilla = {false} // default True
                 externalStyleLinks = ["https://yourextercsslink.com"] // default []
                 externalScripts = ["https://yourexterscriptlink.com"] // default []
@@ -42,6 +43,7 @@ const WhatEver = () => {
 * ``` frameAttributes (optional) ``` - specify dom attributes for iframe. (default {})
 * ``` externalStyleLinks (optional) ``` - you can include any external css or css from you own domain. You have to pass the links as an array. (default [])
 * ``` externalScripts (optional) ``` - you can include any external scripts or scripts from you own domain. You have to pass them as an array. (default [])
+* ``` enabledLatencyForSafari (optional) ``` - you can skip the initial latency for safari with this set to false. (default true)
 * ``` enabledLatencyForMozilla (optional) ``` - you can skip the initial latency for mozilla with this set to false. (default true)
 
 ### Changelog
