@@ -26,7 +26,7 @@ export const IFrame = ({
 
         }
 
-        if ((typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) || (typeof window.safari !== 'undefined' && enabledLatencyForSafari)) {
+        if ((screen.width < 500) || (typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) || (typeof window.safari !== 'undefined' && enabledLatencyForSafari)) {
             setTimeout(() => {
                 ReactDOM.render(children, iFrameRef.current.contentDocument.body);
 
