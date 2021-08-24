@@ -9,6 +9,7 @@ export const IFrame = ({
                            frameAttributes={},
                            externalStyleLinks = [],
                            externalScripts = [],
+                           mobileSupportEnabled = true,
                            enabledLatencyForSafari = true,
                            enabledLatencyForMozilla = true,
                        }) => {
@@ -26,7 +27,7 @@ export const IFrame = ({
 
         }
 
-        if ((screen.width < 500) || (typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) || (typeof window.safari !== 'undefined' && enabledLatencyForSafari)) {
+        if ((screen.width < 500 && mobileSupportEnabled) || (typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) || (typeof window.safari !== 'undefined' && enabledLatencyForSafari)) {
             setTimeout(() => {
                 ReactDOM.render(children, iFrameRef.current.contentDocument.body);
 
