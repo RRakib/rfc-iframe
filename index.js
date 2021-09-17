@@ -1,12 +1,14 @@
 import ReactDOM from 'react-dom';
 import {extractCss} from "goober";
 import {useEffect, createElement, useRef} from 'react';
+import {useState} from "preact/compat";
 
 
 export const IFrame = ({
                            children,
                            goober = true,
                            frameAttributes={},
+                           skipInterval = false,
                            externalStyleLinks = [],
                            externalScripts = [],
                            mobileSupportEnabled = true,
@@ -17,49 +19,71 @@ export const IFrame = ({
     let iFrameRef = useRef(null)
 
     useEffect(() => {
+        if (skipInterval) {
+            setupInsert();
+        } else {
+            const checkingBody = setInterval(() => {
 
+                setupInsert();
+
+                if (iFrameRef.current.contentDocument.body.firstChild) {
+                    clearInterval(checkingBody);
+                }
+
+            }, 200);
+        }
+    });
+
+    const setupInsert = () => {
         if (!iFrameRef.current) {
             return
         }
 
         if (!iFrameRef.current.contentDocument) {
-            return
-
+            return;
         }
 
-        if ((screen.width < 500 && mobileSupportEnabled) || (typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) || (typeof window.safari !== 'undefined' && enabledLatencyForSafari)) {
+        if ((screen.width < 550 && mobileSupportEnabled) || (typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) || (typeof window.safari !== 'undefined' && enabledLatencyForSafari)) {
             setTimeout(() => {
-                ReactDOM.render(children, iFrameRef.current.contentDocument.body);
-
-                const doc = iFrameRef.current.contentDocument;
-                doc.body.style.padding = "0";
-                doc.body.style.margin = "0";
-
-                if(!doc.body.hasChildNodes()) {
-                    setStyleLink(doc);
-                    setExternalScripts(doc);
-                };
-
-                if(goober) {
-                    gooberStyleCopy();
-                }
+                insertIntoDom();
             }, 50)
         } else {
-            ReactDOM.render(children, iFrameRef.current.contentDocument.body);
-            const doc = iFrameRef.current.contentDocument;
-            doc.body.style.padding = "0";
-            doc.body.style.margin = "0";
-
-            if(!doc.body.hasChildNodes()) {
-                setStyleLink(doc);
-                setExternalScripts(doc);
-            };
-
-            if(goober) {
-                gooberStyleCopy();
-            }
+            insertIntoDom();
         }
-    });
+    }
+
+    const insertIntoDom = () => {
+        ReactDOM.render(children, iFrameRef.current.contentDocument.body);
+        const doc = iFrameRef.current.contentDocument;
+        doc.body.style.padding = "0";
+        doc.body.style.margin = "0";
+
+        insertMetaData(doc);
+
+        if(!doc.body.hasChildNodes()) {
+            setStyleLink(doc);
+            setExternalScripts(doc);
+        };
+
+        if(goober) {
+            gooberStyleCopy();
+        }
+    };
+
+    const insertMetaData = (iFrame) => {
+        const hasHeadTag = iFrame.getElementById("viewPortMeta");
+        if (mobileSupportEnabled && enabledLatencyForMozilla && enabledLatencyForSafari) {
+            iFrame.body.style.height = "100%";
+            iFrameRef.current.contentDocument.documentElement.style.setProperty('height', '100%');
+        }
+        if (!hasHeadTag) {
+            const meta = document.createElement("meta")
+            meta.content = "width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no";
+            meta.name = "viewport";
+            meta.id = "viewPortMeta";
+            iFrame.head.appendChild(meta);
+        }
+    };
 
     const gooberStyleCopy = () => {
         const css = extractCss()
@@ -70,7 +94,7 @@ export const IFrame = ({
         }
         iFrameRef.current.contentDocument.getElementById('__goober').innerText = css;
         document.getElementById('_goober').innerText = css;
-    }
+    };
 
     const setStyleLink = (doc) => {
         if(externalStyleLinks.length > 0) {
