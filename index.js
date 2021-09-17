@@ -19,6 +19,7 @@ export const IFrame = ({
     let iFrameRef = useRef(null)
 
     useEffect(() => {
+        setupInsert();
         if (skipInterval) {
             setupInsert();
         } else {
@@ -43,20 +44,25 @@ export const IFrame = ({
             return;
         }
 
-        if ((screen.width < 550 && mobileSupportEnabled) || (typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) || (typeof window.safari !== 'undefined' && enabledLatencyForSafari)) {
+        if ((screen.width < 700 && mobileSupportEnabled) || (typeof InstallTrigger !== 'undefined' && enabledLatencyForMozilla) || (typeof window.safari !== 'undefined' && enabledLatencyForSafari)) {
             setTimeout(() => {
                 insertIntoDom();
-            }, 50)
+            }, 20)
         } else {
             insertIntoDom();
         }
     }
 
     const insertIntoDom = () => {
-        ReactDOM.render(children, iFrameRef.current.contentDocument.body);
         const doc = iFrameRef.current.contentDocument;
+        doc.body.style.display = "none";
+        ReactDOM.render(children, iFrameRef.current.contentDocument.body);
         doc.body.style.padding = "0";
         doc.body.style.margin = "0";
+
+        if(goober) {
+            gooberStyleCopy();
+        }
 
         insertMetaData(doc);
 
@@ -65,9 +71,7 @@ export const IFrame = ({
             setExternalScripts(doc);
         };
 
-        if(goober) {
-            gooberStyleCopy();
-        }
+        doc.body.style.display = "block";
     };
 
     const insertMetaData = (iFrame) => {
