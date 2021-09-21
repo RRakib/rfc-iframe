@@ -55,6 +55,12 @@ export const IFrame = ({
 
     const insertIntoDom = () => {
         const doc = iFrameRef.current.contentDocument;
+
+        if(!doc.body.hasChildNodes()) {
+            setStyleLink(doc);
+            setExternalScripts(doc);
+        };
+
         doc.body.style.display = "none";
         ReactDOM.render(children, iFrameRef.current.contentDocument.body);
         doc.body.style.padding = "0";
@@ -65,11 +71,6 @@ export const IFrame = ({
         }
 
         insertMetaData(doc);
-
-        if(!doc.body.hasChildNodes()) {
-            setStyleLink(doc);
-            setExternalScripts(doc);
-        };
 
         doc.body.style.display = "block";
     };
