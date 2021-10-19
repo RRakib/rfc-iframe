@@ -9,6 +9,7 @@ export const IFrame = ({
                            goober = true,
                            frameAttributes={},
                            skipInterval = false,
+                           loadTdFonts = true,
                            externalStyleLinks = [],
                            externalScripts = [],
                            mobileSupportEnabled = true,
@@ -55,21 +56,25 @@ export const IFrame = ({
 
     const insertIntoDom = () => {
         const doc = iFrameRef.current.contentDocument;
+
+        if(!doc.body.hasChildNodes()) {
+            setStyleLink(doc);
+            setExternalScripts(doc);
+        };
+
         doc.body.style.display = "none";
         ReactDOM.render(children, iFrameRef.current.contentDocument.body);
         doc.body.style.padding = "0";
         doc.body.style.margin = "0";
+        if (loadTdFonts) {
+            doc.body.style.fontFamily = "var(--td-font-family)";
+        }
 
         if(goober) {
             gooberStyleCopy();
         }
 
         insertMetaData(doc);
-
-        if(!doc.body.hasChildNodes()) {
-            setStyleLink(doc);
-            setExternalScripts(doc);
-        };
 
         doc.body.style.display = "block";
     };

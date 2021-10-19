@@ -27,6 +27,7 @@ const WhatEver = () => {
                 goober = {false} // default True
                 frameAttributes = {{width: "100%", ...}}
                 skipInterval = {false} // default True
+                loadTdFonts = true // default True
                 mobileSupportEnabled = {false} // default True
                 enabledLatencyForSafari = {false} // default True
                 enabledLatencyForMozilla = {false} // default True
@@ -43,6 +44,7 @@ const WhatEver = () => {
 ### Props
 * ``` goober (optional) ``` - this plugin supports goober out of the box. If you dont want this feature then set the value to false. (default boolean)
 * ``` frameAttributes (optional) ``` - specify dom attributes for iframe. (default {})
+* ``` loadTdFonts (optional) ``` - [Thrivedesk Specific]
 * ``` skipInterval (optional) ``` - you can include any external css or css from you own domain. You have to pass the links as an array. (default [])
 * ``` externalStyleLinks (optional) ``` - you can include any external css or css from you own domain. You have to pass the links as an array. (default [])
 * ``` externalScripts (optional) ``` - you can include any external scripts or scripts from you own domain. You have to pass them as an array. (default [])
